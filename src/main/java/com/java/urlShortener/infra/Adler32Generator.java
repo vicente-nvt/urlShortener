@@ -1,8 +1,11 @@
-package br.com.java.urlShortener.infra;
+package com.java.urlShortener.infra;
 
 import java.util.zip.Adler32;
 import java.util.zip.Checksum;
 
+import org.springframework.stereotype.Component;
+
+@Component("shortUrlGenerator")
 public class Adler32Generator implements IShortUrlGenerator {
 
 	@Override

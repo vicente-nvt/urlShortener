@@ -1,6 +1,6 @@
-package br.com.java.urlShortener.infra;
+package com.java.urlShortener.infra.dataAccess;
 
-import br.com.java.urlShortener.domain.ShortUrl;
+import com.java.urlShortener.domain.ShortUrl;
 
 public interface IUrlStorage {
 	void addShortUrl(ShortUrl shortUrl) throws Exception;	

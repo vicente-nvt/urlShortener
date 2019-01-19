@@ -1,14 +1,14 @@
-package br.com.java.urlShortener.infra;
+package com.java.urlShortener.infra.dataAccess;
 
 import java.util.HashMap;
 
-import br.com.java.urlShortener.domain.ShortUrl;
+import com.java.urlShortener.domain.ShortUrl;
 
-public class UrlStorage implements IUrlStorage {
+public class UrlMemoryStorage implements IUrlStorage {
 
 	private HashMap<String, String> shortUrlMap;
 
-	public UrlStorage() {
+	public UrlMemoryStorage() {
 		shortUrlMap = new HashMap<String, String>();
 	}
 

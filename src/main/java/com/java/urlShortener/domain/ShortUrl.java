@@ -1,4 +1,4 @@
-package br.com.java.urlShortener.domain;
+package com.java.urlShortener.domain;
 
 public class ShortUrl {
 

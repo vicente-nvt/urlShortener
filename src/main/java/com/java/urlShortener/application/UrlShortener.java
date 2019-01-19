@@ -1,32 +1,34 @@
-package br.com.java.urlShortener.service;
+package com.java.urlShortener.application;
 
 import java.net.URL;
 import java.util.regex.Pattern;
 
-import br.com.java.urlShortener.domain.ShortUrl;
-import br.com.java.urlShortener.infra.IShortUrlGenerator;
-import br.com.java.urlShortener.infra.IUrlStorage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.java.urlShortener.domain.ShortUrl;
+import com.java.urlShortener.infra.IShortUrlGenerator;
+import com.java.urlShortener.infra.dataAccess.IUrlStorage;
+
+@Component("urlShortener")
 public class UrlShortener implements IUrlShortener {
 
+	@Autowired
 	private IUrlStorage urlStorage;
+	@Autowired
 	private IShortUrlGenerator shortUrlGenerator;
-
-	public UrlShortener(IUrlStorage urlStorage, IShortUrlGenerator shortUrlGenerator) {
-		this.urlStorage = urlStorage;
-		this.shortUrlGenerator = shortUrlGenerator;
-	}
 
 	public ShortUrl makeShortUrl(String originalUrl) throws Exception {
 		validateUrl(originalUrl);
-		String shortUrl = shortUrlGenerator.generateShortUrl(originalUrl);
-		ShortUrl createdShortUrl = new ShortUrl(shortUrl, originalUrl);
-		this.urlStorage.addShortUrl(createdShortUrl);
+		String generatedShortUrl = shortUrlGenerator.generateShortUrl(originalUrl);
+		ShortUrl shortUrl = new ShortUrl(generatedShortUrl, originalUrl);
+		
+		this.urlStorage.addShortUrl(shortUrl);
 
-		return createdShortUrl;
+		return shortUrl;
 	}
 
-	public ShortUrl getOriginalUrl(String shortUrl) {
+	public ShortUrl getShortUrl(String shortUrl) {
 		return this.urlStorage.getShortUrl(shortUrl);
 	}
 
@@ -37,14 +39,14 @@ public class UrlShortener implements IUrlShortener {
 
 		boolean matchesPattern = pattern.matcher(url).matches();
 		boolean canCreateAnURL;
-		
+
 		try {
 			new URL(url);
 			canCreateAnURL = true;
 		} catch (Exception e) {
 			canCreateAnURL = false;
 		}
-		
+
 		if (!matchesPattern && !canCreateAnURL)
 			throw new Exception("An invalid URL was informed: " + url);
 	}
