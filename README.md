@@ -42,11 +42,11 @@ After prepare the environment, complete the steps below:
 
 1. To get a new short URL you should POST to localhost:8080 a JSON like these:
 
-```{ "url" : "https://github.com/vicente-nvt/urlShortener" }```
+> ```{ "url" : "https://github.com/vicente-nvt/urlShortener" }```
 
 And then you will receive an answer as a JSON that contains the shortURL, like this:
 
-```
+> ```
 {
     "originalUrl": "https://github.com/vicente-nvt/urlShortener",
     "shortUrl": "6552109a"
