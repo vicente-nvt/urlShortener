@@ -23,7 +23,7 @@ public class MongoDataSource implements IDataSource {
 		if (mongoClient == null) {
 			mongoClient = new MongoClient(mongoClientURIProvider.getClientUri());
 			database = mongoClient.getDatabase(databaseName);
-			
+
 			BasicDBObject index = new BasicDBObject("shortUrl", 1);
 			IndexOptions unique = new IndexOptions().unique(true);
 			database.getCollection("shortUrl").createIndex(index, unique);
@@ -33,7 +33,6 @@ public class MongoDataSource implements IDataSource {
 	@Override
 	public MongoCollection<Document> getCollection(String collectionName) {
 		checkConnection();
-		
 		return database.getCollection(collectionName);
 	}
 }

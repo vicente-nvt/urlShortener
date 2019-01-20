@@ -22,7 +22,7 @@ public class UrlShortener implements IUrlShortener {
 		validateUrl(originalUrl);
 		String generatedShortUrl = shortUrlGenerator.generateShortUrl(originalUrl);
 		ShortUrl shortUrl = new ShortUrl(generatedShortUrl, originalUrl);
-		
+
 		this.urlStorage.addShortUrl(shortUrl);
 
 		return shortUrl;

@@ -9,12 +9,12 @@ public class ShortUrl {
 		this.shortUrl = shortUrl;
 		this.originalUrl = originalUrl;
 	}
-	
+
 	public String getShortUrl() {
 		return this.shortUrl;
 	}
-	
-	public String getOriginalUrl(){
+
+	public String getOriginalUrl() {
 		return this.originalUrl;
 	}
 }

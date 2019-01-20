@@ -37,9 +37,7 @@ public class UrlMongoStorage implements IUrlStorage {
 
 	@Override
 	public ShortUrl getShortUrl(String shortUrl) {
-
 		String originalUrl = getOriginalUrl(shortUrl);
-
 		if ("".equals(originalUrl))
 			return null;
 
@@ -47,14 +45,12 @@ public class UrlMongoStorage implements IUrlStorage {
 	}
 
 	private boolean checkIfOriginalUrlIsTheSame(ShortUrl shortUrl) {
-
 		String foundOriginalUrl = getOriginalUrl(shortUrl.getShortUrl());
 
 		return foundOriginalUrl.equals(shortUrl.getOriginalUrl());
 	}
 
 	private String getOriginalUrl(String shortUrl) {
-
 		MongoCollection<Document> collection = mongoDataSource.getCollection(collectionName);
 
 		BasicDBObject whereQuery = new BasicDBObject();

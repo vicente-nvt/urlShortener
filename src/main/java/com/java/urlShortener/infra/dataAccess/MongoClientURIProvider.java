@@ -8,8 +8,7 @@ import com.mongodb.MongoClientURI;
 public class MongoClientURIProvider implements IClientURIProvider {
 
 	@Override
-	public MongoClientURI getClientUri() {		
+	public MongoClientURI getClientUri() {
 		return new MongoClientURI("mongodb://mongo:27017");
 	}
-
 }

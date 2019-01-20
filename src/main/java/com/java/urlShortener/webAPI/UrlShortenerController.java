@@ -43,7 +43,6 @@ public class UrlShortenerController {
 		}
 	}
 
-
 	@RequestMapping(value = "/{url}", method = RequestMethod.GET)
 	public void goToOriginalUrl(@PathVariable("url") String shortUrl, HttpServletResponse response) throws IOException {
 
@@ -55,8 +54,9 @@ public class UrlShortenerController {
 		} else
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 	}
-	
+
 	private String getUrlToShortenFromRequestBody(String url) throws IOException {
+
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode actualObj = mapper.readTree(url);
 		String urlToShortify = actualObj.get("url").asText();

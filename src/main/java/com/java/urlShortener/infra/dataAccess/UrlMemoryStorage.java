@@ -15,13 +15,13 @@ public class UrlMemoryStorage implements IUrlStorage {
 	@Override
 	public void addShortUrl(ShortUrl shortUrl) throws Exception {
 
-		if (shortUrlMap.containsKey(shortUrl.toString())) {			
+		if (shortUrlMap.containsKey(shortUrl.toString())) {
 			if (shortUrlMap.get(shortUrl.toString()).equals(shortUrl.getOriginalUrl()))
 				return;
 			else
-				throw new Exception("Duplicated Key");			
+				throw new Exception("Duplicated Key");
 		}
-			
+
 		shortUrlMap.put(shortUrl.getShortUrl(), shortUrl.getOriginalUrl());
 	}
 
