@@ -8,8 +8,8 @@ urlShortner is the resolution of this [proposal](https://gist.github.com/FylmTM/
 
 ### Requirements:
 
-* **Docker** - to start containers [here](https://www.docker.com/products/docker-desktop)
-* **Apache Maven** - to compile and package the application [here](https://maven.apache.org/)
+* [**Docker**](https://www.docker.com/products/docker-desktop) - to start containers
+* [**Apache Maven**](https://maven.apache.org/) - to compile and package the application
 
 ### Running
 
