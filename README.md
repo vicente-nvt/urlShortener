@@ -1,6 +1,6 @@
 # urlShortener
 
-urlShortner is the resolution of this [proposal] https://gist.github.com/FylmTM/e3c4e5f337a176e94d6dd51703068925
+urlShortner is the resolution of this [proposal] (https://gist.github.com/FylmTM/e3c4e5f337a176e94d6dd51703068925)
 
 ## Running the application
 
