@@ -19,7 +19,7 @@ public class UrlMongoStorage implements IUrlStorage {
 
 	@Override
 	public void addShortUrl(ShortUrl shortUrl) throws Exception {
-		
+
 		Document newShortUrl = new Document("shortUrl", shortUrl.getShortUrl()).append("originalUrl",
 				shortUrl.getOriginalUrl());
 
@@ -37,21 +37,24 @@ public class UrlMongoStorage implements IUrlStorage {
 
 	@Override
 	public ShortUrl getShortUrl(String shortUrl) {
-		
+
 		String originalUrl = getOriginalUrl(shortUrl);
-		
+
+		if ("".equals(originalUrl))
+			return null;
+
 		return new ShortUrl(shortUrl, originalUrl);
 	}
 
 	private boolean checkIfOriginalUrlIsTheSame(ShortUrl shortUrl) {
-		
+
 		String foundOriginalUrl = getOriginalUrl(shortUrl.getShortUrl());
-		
+
 		return foundOriginalUrl.equals(shortUrl.getOriginalUrl());
 	}
 
 	private String getOriginalUrl(String shortUrl) {
-		
+
 		MongoCollection<Document> collection = mongoDataSource.getCollection(collectionName);
 
 		BasicDBObject whereQuery = new BasicDBObject();
@@ -60,6 +63,10 @@ public class UrlMongoStorage implements IUrlStorage {
 		fields.put("originalUrl", 1);
 
 		Document result = collection.find(Filters.eq("shortUrl", shortUrl)).first();
+
+		if (result == null)
+			return "";
+
 		return (String) result.get("originalUrl");
 	}
 }
