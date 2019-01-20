@@ -40,7 +40,7 @@ After prepare the environment, complete the steps below:
 
 ### Using the application
 
-1. To get a new short URL you should POST to localhost:8080 a JSON like these:
+1. To get a new short URL you should POST to localhost:8080 a JSON like this:
 
 > ```{ "url" : "https://github.com/vicente-nvt/urlShortener" }```
 
