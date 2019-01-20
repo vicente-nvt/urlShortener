@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.mongodb.MongoClientURI;
 
 @Component("mongoClientURIProvider")
-public class ClientURIProvider implements IMongoURIConnectionProvider {
+public class MongoClientURIProvider implements IClientURIProvider {
 
 	@Override
 	public MongoClientURI getClientUri() {		

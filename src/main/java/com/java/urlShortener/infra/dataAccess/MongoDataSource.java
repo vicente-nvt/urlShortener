@@ -14,7 +14,7 @@ import com.mongodb.client.model.IndexOptions;
 public class MongoDataSource implements IDataSource {
 
 	@Autowired
-	private IMongoURIConnectionProvider mongoClientURIProvider;
+	private IClientURIProvider mongoClientURIProvider;
 	private String databaseName = "urlShortener";
 	private MongoClient mongoClient;
 	private MongoDatabase database;
