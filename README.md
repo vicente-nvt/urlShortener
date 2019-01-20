@@ -46,12 +46,12 @@ After prepare the environment, complete the steps below:
 
 And then you will receive an answer as a JSON that contains the shortURL, like this:
 
-> ```
-{
-    "originalUrl": "https://github.com/vicente-nvt/urlShortener",
-    "shortUrl": "6552109a"
-}
-```
+>```
+>{
+>    "originalUrl": "https://github.com/vicente-nvt/urlShortener",
+>    "shortUrl": "6552109a"
+>}
+>```
 
 2. To retrieve your original URL and being redirected to the website then go at your web browser and put the link with your ShortURL, like this:
 
