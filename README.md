@@ -7,7 +7,7 @@ Create a network
 
 Start MongoDB container
 
-	docker run --expose 27017 --network urlShortenerNetwork --rm --name mongoDB -d mongo:3.4.18-jessie
+	docker run --expose 27017 --network urlShortenerNetwork --rm --name mongo -d mongo:3.4.18-jessie
 	
 Compile Application
 
