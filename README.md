@@ -12,23 +12,23 @@ urlShortner is the resolution of this [proposal](https://gist.github.com/FylmTM/
 
 After prepare the environment, complete the steps below:
 
-1. Create a network
+1. Create a network on docker
 
 	> ```docker network create urlShortenerNetwork```
 
-2. Start MongoDB container
+2. Start a MongoDB container
 
 	> ```docker run --expose 27017 --network urlShortenerNetwork --rm --name mongo -d mongo:3.4.18-jessie```
 	
-3. Compile Application
+3. Compile the Application
 
 	> ```mvn package```
 	
-4. Build dockerfile
+4. Build the application Dockerfile
 
 	> ```docker build -t url-shortener .```
 
-5. Start app
+5. Start a container to run the app
 
 	> ```docker run -p 8080:8080 --network urlShortenerNetwork --rm --name urlShortener url-shortener```
 
