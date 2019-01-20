@@ -6,7 +6,7 @@ urlShortner is the resolution of this [proposal](https://gist.github.com/FylmTM/
 
 #### Requirements:
 * **Docker** - to start containers [here](https://www.docker.com/products/docker-desktop)
-* **Apache Maven** - to compile and package the application [link here](https://maven.apache.org/)
+* **Apache Maven** - to compile and package the application [here](https://maven.apache.org/)
 
 #### Running
 
