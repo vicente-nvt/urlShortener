@@ -2,13 +2,17 @@
 
 urlShortner is the resolution of this [proposal](https://gist.github.com/FylmTM/e3c4e5f337a176e94d6dd51703068925)
 
-## Running the application
 
-#### Requirements:
+
+## How to use this
+
+### Requirements:
+
 * **Docker** - to start containers [here](https://www.docker.com/products/docker-desktop)
 * **Apache Maven** - to compile and package the application [here](https://maven.apache.org/)
 
-#### Running
+### Running
+
 
 After prepare the environment, complete the steps below:
 
@@ -33,7 +37,8 @@ After prepare the environment, complete the steps below:
 	> ```docker run -p 8080:8080 --network urlShortenerNetwork --rm --name urlShortener url-shortener```
 
 
-#### Testing the application
+
+### Using the application
 
 1. To get a new short URL you should POST to localhost:8080 a JSON like these:
 
@@ -52,4 +57,4 @@ And then you will receive an answer as a JSON that contains the shortURL, like t
 
 > localhost:8080/6552109a
 
-Have Fun!
+##Have Fun!
