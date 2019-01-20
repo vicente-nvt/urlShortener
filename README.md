@@ -50,7 +50,7 @@ And then you will receive an answer as a JSON that contains the shortURL, like t
 }
 ```
 
-2. To retrieve your original URL and being redirected to the website then go at your web browser and put the link:
+2. To retrieve your original URL and being redirected to the website then go at your web browser and put the link with your ShortURL, like this:
 
 > localhost:8080/6552109a
 
