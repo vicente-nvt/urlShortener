@@ -9,6 +9,6 @@ public class MongoClientURIProvider implements IClientURIProvider {
 
 	@Override
 	public MongoClientURI getClientUri() {
-		return new MongoClientURI("mongodb://mongo:27017");
+		return new MongoClientURI("mongodb://mongo:27017"); //Refactor this to use environment variable
 	}
 }
