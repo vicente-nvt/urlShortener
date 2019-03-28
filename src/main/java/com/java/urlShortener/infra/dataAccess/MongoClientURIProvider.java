@@ -1,19 +1,15 @@
 package com.java.urlShortener.infra.dataAccess;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.java.urlShortener.infra.IEnvironmentVariablesProvider;
+import com.java.urlShortener.infra.EnvironmentVariablesProvider;
 import com.mongodb.MongoClientURI;
 
+import org.springframework.stereotype.Component;
+
 @Component("mongoClientURIProvider")
-public class MongoClientURIProvider implements IClientURIProvider {
+public class MongoClientURIProvider {
 
-	@Autowired
-	IEnvironmentVariablesProvider environmentVariablesProvider;
-
-	@Override
 	public MongoClientURI getClientUri() {
-		return new MongoClientURI(environmentVariablesProvider.getVariable("database_connection"));
+		String databaseConnectionPath = EnvironmentVariablesProvider.getVariable("database_connection");
+		return new MongoClientURI(databaseConnectionPath);
 	}
 }

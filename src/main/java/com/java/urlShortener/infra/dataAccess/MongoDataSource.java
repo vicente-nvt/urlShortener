@@ -11,28 +11,34 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.IndexOptions;
 
 @Component("mongoDataSource")
-public class MongoDataSource implements IDataSource {
+public class MongoDataSource {
 
-	@Autowired
-	private IClientURIProvider mongoClientURIProvider;
+	private MongoClientURIProvider mongoClientURIProvider;	
 	private String databaseName = "urlShortener";
 	private MongoClient mongoClient;
 	private MongoDatabase database;
+
+	@Autowired
+	public MongoDataSource(MongoClientURIProvider clientUriProvider) {
+		this.mongoClientURIProvider = clientUriProvider;
+	}
+
+	public MongoCollection<Document> getCollection(String indexName, String collectionName) {
+		checkConnection();
+		ensureThatIndexIsCreated(indexName, collectionName);
+		return database.getCollection(collectionName);
+	}
 
 	private void checkConnection() {
 		if (mongoClient == null) {
 			mongoClient = new MongoClient(mongoClientURIProvider.getClientUri());
 			database = mongoClient.getDatabase(databaseName);
-
-			BasicDBObject index = new BasicDBObject("shortUrl", 1);
-			IndexOptions unique = new IndexOptions().unique(true);
-			database.getCollection("shortUrl").createIndex(index, unique);
 		}
 	}
 
-	@Override
-	public MongoCollection<Document> getCollection(String collectionName) {
-		checkConnection();
-		return database.getCollection(collectionName);
+	private void ensureThatIndexIsCreated(String indexName, String collectionName){
+		BasicDBObject index = new BasicDBObject(indexName, 1);
+		IndexOptions unique = new IndexOptions().unique(true);
+		database.getCollection(collectionName).createIndex(index, unique);
 	}
 }

@@ -4,6 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.java.urlShortener.application.OriginalUrlRetriever;
+import com.java.urlShortener.application.ShortUrlCreator;
+import com.java.urlShortener.domain.ShortUrl;
+import com.java.urlShortener.infra.NotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,28 +21,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.java.urlShortener.application.IUrlShortener;
-import com.java.urlShortener.domain.ShortUrl;
-
 @RestController
 public class UrlShortenerController {
 
+	private ShortUrlCreator shortUrlCreator;
+	private OriginalUrlRetriever originalUrlRetriever;
+
 	@Autowired
-	private IUrlShortener urlShortener;
+	public UrlShortenerController(ShortUrlCreator shortUrlCreator, OriginalUrlRetriever originalUrlRetriever) {
+		this.shortUrlCreator = shortUrlCreator;
+		this.originalUrlRetriever = originalUrlRetriever;
+	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<String> index() {
 		return ResponseEntity.ok("URL Shortener");
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/shortify", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Object> createShortUrl(@RequestBody String requestBody) {
 
 		try {
 			String urlToShorten = getUrlToShortenFromRequestBody(requestBody);
-			ShortUrl shortUrl = urlShortener.makeShortUrl(urlToShorten);
+			ShortUrl shortUrl = shortUrlCreator.create(urlToShorten);
 
 			return new ResponseEntity<Object>(shortUrl, HttpStatus.OK);
 		} catch (Exception e) {
@@ -46,17 +54,23 @@ public class UrlShortenerController {
 	@RequestMapping(value = "/{url}", method = RequestMethod.GET)
 	public void goToOriginalUrl(@PathVariable("url") String shortUrl, HttpServletResponse response) throws IOException {
 
-		ShortUrl storedUrl = urlShortener.getShortUrl(shortUrl);
+		try {
+			String originalUrl = originalUrlRetriever.getOriginalUrl(shortUrl);
 
-		if (storedUrl != null) {
-			response.addHeader("Location", storedUrl.getOriginalUrl());
-			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-		} else
+			if (!originalUrl.isEmpty()) {
+				response.addHeader("Location", originalUrl);
+				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+			} else
+				throw new NotFoundException();
+
+		} catch (NotFoundException e) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+		} catch (Exception e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+		}
 	}
 
 	private String getUrlToShortenFromRequestBody(String url) throws IOException {
-
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode actualObj = mapper.readTree(url);
 		String urlToShortify = actualObj.get("url").asText();
