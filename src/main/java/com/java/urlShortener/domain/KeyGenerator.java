@@ -1,15 +1,10 @@
-package com.java.urlShortener.infra;
+package com.java.urlShortener.domain;
 
 import java.util.zip.Adler32;
 import java.util.zip.Checksum;
 
-import org.springframework.stereotype.Component;
-
-@Component("shortUrlGenerator")
-public class Adler32Generator implements IShortUrlGenerator {
-
-	@Override
-	public String generateShortUrl(String url) {
+public class KeyGenerator {
+	public static String generateKey(String url) {
 		byte bytes[] = url.getBytes();
 		Checksum checksum = new Adler32();
 		checksum.update(bytes, 0, bytes.length);
