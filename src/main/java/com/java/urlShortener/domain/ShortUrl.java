@@ -48,6 +48,6 @@ public class ShortUrl {
 			canCreateAnURL = false;
 		}
 
-		return matchesPattern && canCreateAnURL;
+		return matchesPattern || canCreateAnURL;
 	}
 }

@@ -11,11 +11,11 @@ public class OriginalUrlRetriever {
     private ShortUrlRepository shortUrlRepository;
 
     @Autowired
-	public OriginalUrlRetriever(ShortUrlRepository shortUrlRepository) {
-		this.shortUrlRepository = shortUrlRepository;
+    public OriginalUrlRetriever(ShortUrlRepository shortUrlRepository) {
+        this.shortUrlRepository = shortUrlRepository;
     }
 
-	public String getOriginalUrl(String urlKey) throws Exception {
-		return shortUrlRepository.getOriginalUrlBy(urlKey);
-	}
+    public String getOriginalUrl(String urlKey) throws Exception {
+        return shortUrlRepository.getOriginalUrlBy(urlKey);
+    }
 }
