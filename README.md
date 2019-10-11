@@ -9,7 +9,6 @@ urlShortner is the resolution of this [proposal](https://gist.github.com/FylmTM/
 ### Requirements:
 
 * [**Docker**](https://www.docker.com/products/docker-desktop) - to start containers
-* [**Apache Maven**](https://maven.apache.org/) - to compile and package the application
 
 ### Running
 
@@ -24,23 +23,15 @@ After prepare the environment, complete the steps below:
 
 	> ```docker run --expose 27017 --network urlShortenerNetwork --rm --name mongo -d mongo:3.4.18-jessie```
 	
-3. Compile the Application
+3. Start a container to run the app
 
-	> ```mvn package```
-	
-4. Build the application Dockerfile
-
-	> ```docker build -t url-shortener .```
-
-5. Start a container to run the app
-
-	> ```docker run -p 8080:8080 -e database_connection = 'mongodb://mongo:27017' --network urlShortenerNetwork --rm --name urlShortener url-shortener```
+	> ```docker run -p 8080:8080 -e database_connection = 'mongodb://mongo:27017' --network urlShortenerNetwork --rm --name urlShortener vicentenvt/url-shortener```
 
 
 
 ### Using the application
 
-1. To get a new short URL you should POST to localhost:8080 a JSON like this:
+1. To get a new short URL you should POST a JSON, like below, to localhost:8080/shortify:
 
 > ```{ "url" : "https://github.com/vicente-nvt/urlShortener" }```
 
