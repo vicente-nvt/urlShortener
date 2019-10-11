@@ -25,7 +25,7 @@ After prepare the environment, complete the steps below:
 	
 3. Start a container to run the app
 
-	> ```docker run -p 8080:8080 -e database_connection = 'mongodb://mongo:27017' --network urlShortenerNetwork --rm --name urlShortener vicentenvt/url-shortener```
+	> ```docker run -p 8080:8080 -e database_connection="mongodb://mongo:27017" --network urlShortenerNetwork --rm --name urlShortener vicentenvt/url-shortener```
 
 
 
